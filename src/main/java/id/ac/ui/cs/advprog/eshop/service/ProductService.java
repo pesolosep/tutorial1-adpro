@@ -6,4 +6,5 @@ public interface ProductService {
     public List<Product> findAll();
     public void delete(String productId); // Add this line
     public Product findById(String productId);
-    }
+    public Product edit(String productId, Product product);
+}
