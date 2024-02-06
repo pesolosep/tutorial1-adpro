@@ -98,16 +98,12 @@ public class ProductRepositoryTest {
         product.setProductQuantity(100);
         productRepository.create(product);
 
-        Product updatedProduct = new Product();
-        updatedProduct.setProductName("Sampo Cap Usep");
-        updatedProduct.setProductQuantity(50);
+        Product savedProduct = productRepository.findById(product.getProductId());
+        assertEquals(product.getProductId(), savedProduct.getProductId());
+        assertEquals(product.getProductName(), savedProduct.getProductName());
+        assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
 
-        productRepository.edit(product.getProductId(), updatedProduct);
-
-        product = productRepository.findById(product.getProductId());
-
-        assertEquals(product.getProductId(), updatedProduct.getProductId());
-        assertEquals(product.getProductName(), updatedProduct.getProductName());
-        assertEquals(product.getProductQuantity(), updatedProduct.getProductQuantity());
+        productRepository.delete(product.getProductId());
+        testFindAllIfEmpty();
+        }
     }
-}
