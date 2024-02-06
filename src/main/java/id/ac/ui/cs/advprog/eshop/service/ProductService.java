@@ -4,4 +4,6 @@ import id.ac.ui.cs.advprog.eshop.model.Product;
 public interface ProductService {
     public Product create(Product product);
     public List<Product> findAll();
+    public void delete(String productId); // Add this line
+    public Product findById(String productId);
     }
