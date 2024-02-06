@@ -19,6 +19,19 @@ public class ProductRepository {
         return productData.iterator();
     }
 
+    public void delete(String productId) {
+        Product product = this.findById(productId);
+        productData.remove(product);
+    }
+    public Product findById(String productId){
+        Product foundProduct = null;
+        for(Product product:productData){
+            if(productId.equals(product.getProductId())){
+                foundProduct = product;
 
-
+                break;
+            }
+        }
+        return foundProduct;
+    }
 }
