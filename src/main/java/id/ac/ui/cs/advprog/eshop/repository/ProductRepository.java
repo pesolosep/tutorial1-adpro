@@ -18,11 +18,11 @@ public class ProductRepository {
     public Iterator<Product> findAll(){
         return productData.iterator();
     }
-
     public void delete(String productId) {
         Product product = this.findById(productId);
         productData.remove(product);
     }
+
     public Product findById(String productId){
         Product foundProduct = null;
         for(Product product:productData){
@@ -33,5 +33,13 @@ public class ProductRepository {
             }
         }
         return foundProduct;
+    }
+
+    public Product edit(String productId, Product updatedproduct){
+        updatedproduct.setProductId(productId);
+        Product product = this.findById(productId);
+        int index = productData.indexOf(product);
+        productData.set(index, updatedproduct);
+        return product;
     }
 }
