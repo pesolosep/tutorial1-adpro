@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
-    private long nextId = 1; // Start IDs from 1
+
     public Product create(Product product){
-        product.setProductId(String.valueOf(nextId++));
+        product.setProductId(String.valueOf(productData.size()+1));
         productData.add(product);
         return product;
     }
