@@ -29,7 +29,7 @@ class ProductControllerTest {
 
     @Test
     void testCreateProductPage(){
-        String expectedViewName = "createProduct";
+        String expectedViewName = "CreateProduct";
         String actualViewName = productController.createProductPage(model);
         assertEquals(expectedViewName, actualViewName);
     }
