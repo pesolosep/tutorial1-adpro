@@ -1,15 +1,18 @@
 plugins {
 	java
 	jacoco
+	id("org.sonarqube") version "4.4.1.3373"
 	id("org.springframework.boot") version "3.2.2"
 	id("io.spring.dependency-management") version "1.1.4"
-	id("org.sonarqube") version "4.4.1.3373"
 }
 
-val seleniumJavaVersion = "4.14.1"
-val seleniumJupiterVersion = "5.0.1"
-val webdrivermanagerVersion = "5.6.3"
-val junitJupiterVersion = "5.9.1"
+sonar {
+	properties {
+		property("sonar.host.url", "https://sonarcloud.io")
+		property("sonar.organization","pesolosep")
+		property("sonar.projectKey", "pesolosep_tutorial1-adpro")
+	}
+}
 
 group = "id.ac.ui.cs.advprog"
 version = "0.0.1-SNAPSHOT"
@@ -28,6 +31,11 @@ repositories {
 	mavenCentral()
 }
 
+val seleniumJavaVersion = "4.14.1"
+val seleniumJupiterVersion = "5.0.1"
+val webdrivermanagerVersion = "5.6.3"
+val junitJupiterVersion = "5.9.1"
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -44,16 +52,18 @@ dependencies {
 }
 
 tasks.register<Test>("unitTest") {
-	description = "Run unit tests"
+	description = "Runs unit tests."
 	group = "verification"
+
 	filter {
 		excludeTestsMatching("*FunctionalTest")
 	}
 }
 
 tasks.register<Test>("functionalTest") {
-	description = "Run functional tests"
-	group = "verification"
+	description = "Runs functional tests."
+	group="verification"
+
 	filter {
 		includeTestsMatching("*FunctionalTest")
 	}
@@ -63,15 +73,15 @@ tasks.withType<Test>().configureEach {
 	useJUnitPlatform()
 }
 
-tasks.test{
-	filter{
+tasks.test {
+	filter {
 		excludeTestsMatching("*FunctionalTest")
 	}
 
 	finalizedBy(tasks.jacocoTestReport)
 }
 
-tasks.jacocoTestReport{
+tasks.jacocoTestReport {
 	dependsOn(tasks.test)
 
 	reports {
@@ -79,14 +89,3 @@ tasks.jacocoTestReport{
 		xml.required = true
 	}
 }
-
-sonar {
-	properties {
-		property("sonar.projectKey", "pesolosep_tutorial1-adpro")
-		property("sonar.organization", "pesolosep")
-		property("sonar.host.url", "https://sonarcloud.io")
-	}
-}
-
-
-
