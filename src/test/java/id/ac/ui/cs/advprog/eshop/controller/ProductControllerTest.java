@@ -44,18 +44,18 @@ class ProductControllerTest {
 
     @Test
     void testEditProductPage(){
-        String expectedViewName = "createProduct";
+        String expectedViewName = "CreateProduct";
         String actualViewName = productController.createProductPage(model);
         assertEquals(expectedViewName, actualViewName);
 
-        expectedViewName = "editProduct";
+        expectedViewName = "EditProduct";
         actualViewName = productController.editProductPage("1", model);
         assertEquals(expectedViewName,actualViewName);
     }
 
     @Test
     void testEditProductPost() {
-        String expectedViewName = "createProduct";
+        String expectedViewName = "CreateProduct";
         String actualViewName = productController.createProductPage(model);
         assertEquals(expectedViewName, actualViewName);
 
@@ -67,14 +67,14 @@ class ProductControllerTest {
 
     @Test
     void testProductListPage() {
-        String expectedViewName = "productlist";
+        String expectedViewName = "ProductList";
         String actualViewName = productController.productListPage(model);
         assertEquals(expectedViewName, actualViewName);
     }
 
     @Test
     void testDeleteProduct() {
-        String expectedViewName = "createProduct";
+        String expectedViewName = "CreateProduct";
         String actualViewName = productController.createProductPage(model);
         assertEquals(expectedViewName, actualViewName);
 
