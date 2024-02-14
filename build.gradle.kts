@@ -85,7 +85,7 @@ tasks.jacocoTestReport {
 sonar {
 	properties {
 		property("sonar.host.url", "https://sonarcloud.io")
-		property("sonar.organization", "nabilmuafa")
-		property("sonar.projectKey", "nabilmuafa_eshop")
+		property("sonar.organization", "pesolosep")
+		property("sonar.projectKey", "pesolosep_tutorial1-adpro")
 	}
 }
