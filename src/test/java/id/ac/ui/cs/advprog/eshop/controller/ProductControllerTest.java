@@ -2,6 +2,7 @@ package id.ac.ui.cs.advprog.eshop.controller;
 
 
 import org.springframework.ui.Model;
+import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProductControllerTest {
-
+    @Mock
+    ProductService productService;
     @Mock
     Model model;
     @InjectMocks
