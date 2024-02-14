@@ -18,9 +18,10 @@ public class ProductRepository {
     public Iterator<Product> findAll(){
         return productData.iterator();
     }
-    public void delete(String productId) {
+    public Product delete(String productId) {
         Product product = this.findById(productId);
         productData.remove(product);
+        return product;
     }
 
     public Product findById(String productId){

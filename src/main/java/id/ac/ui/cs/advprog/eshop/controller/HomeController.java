@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping({""})
 public class HomeController {
-    public HomeController() {
-    }
 
     @GetMapping({""})
     public String homePage() {
