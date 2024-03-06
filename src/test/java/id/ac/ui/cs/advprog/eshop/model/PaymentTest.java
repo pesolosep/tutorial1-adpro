@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import id.ac.ui.cs.advprog.eshop.model.Payment;
+
 
 /** id: String
  method: String to save a sub-feature name.

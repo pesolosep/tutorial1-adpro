@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PaymentServiceImpl implements PaymentService{
-    @Autowired
     PaymentRepository paymentRepository;
     @Override
     public Payment addPayment(String id, Order order, String method, Map<String, String> paymentData) {
