@@ -62,7 +62,6 @@ public class Payment {
         if (count != 8) {
             return "REJECTED";
         }
-        this.order.setStatus(OrderStatus.SUCCESS.getValue());
         return "SUCCESS";
     }
 
