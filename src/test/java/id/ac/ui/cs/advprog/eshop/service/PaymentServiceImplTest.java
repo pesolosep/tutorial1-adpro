@@ -6,7 +6,7 @@ import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.repository.OrderRepository;
-//import id.ac.ui.cs.advprog.eshop.repository.PaymentRepository;
+import id.ac.ui.cs.advprog.eshop.repository.PaymentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +28,7 @@ public class PaymentServiceImplTest {
     List<Payment> payments;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         payments=  new ArrayList<>();
         List<Order> orders = new ArrayList<>();
         List<Product> products = new ArrayList<>();
@@ -46,33 +46,33 @@ public class PaymentServiceImplTest {
 
         Map<String, String> paymentData1 = new HashMap<>();
         paymentData1.put("voucherCode", "ESHOP1234ABC5678");
-        Payment payment1 = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf",orders.get(1),"VOUCHER", paymentData1);
+        Payment payment1 = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", orders.get(0), "VOUCHER", paymentData1);
         payments.add(payment1);
 
         Map<String, String> paymentData2 = new HashMap<>();
         paymentData2.put("bankName", "ABC");
         paymentData2.put("referenceCode", "123");
-        Payment payment2 = new Payment("563456ef-e9d3-490c-8309-043c926b80e4",orders.get(2),"BANK", paymentData2);
+        Payment payment2 = new Payment("563456ef-e9d3-490c-8309-043c926b80e4", orders.get(1), "BANK", paymentData2);
         payments.add(payment2);
 
     }
 
     @Test
-    void testAddPayment(){
+    void testAddPayment() {
         Payment payment = payments.get(1);
-        doReturn(payment).when(paymentRepository).save(payment);
-        Order result  = paymentService.addPayment(payment.getOrder(), payment.getMethod(), payment.getPaymentData());
-        verify(paymentRepository, times(1)).save(payment);
+        Payment result = paymentService.addPayment(payment.getId(),payment.getOrder(), payment.getMethod(), payment.getPaymentData());
+        verify(paymentRepository, times(1)).save(any(Payment.class));
         assertEquals(payment.getId(), result.getId());
     }
 
     @Test
-    void testAddPaymentIfAlreadyExists(){
+    void testAddPaymentIfAlreadyExists() {
         Payment payment = payments.get(1);
         doReturn(payment).when(paymentRepository).findById(payment.getId());
-        assertNull(paymentService.addPayment(payment.getOrder(), payment.getMethod(), payment.getPaymentData()));
+        assertNull(paymentService.addPayment(payment.getId(), payment.getOrder(), payment.getMethod(), payment.getPaymentData()));
         verify(paymentRepository, times(0)).save(payment);
     }
+
     @Test
     void testSetValid() {
         Payment payment = payments.get(1);
@@ -105,8 +105,10 @@ public class PaymentServiceImplTest {
 
     @Test
     void testGetAllPayments(){
-        doReturn(payments).when(paymentRepository.getAllPayment());
+        doReturn(payments).when(paymentRepository).getAllPayment();
         List<Payment> results = paymentService.getAllPayments();
         assertEquals(payments, results);
     }
 }
+
+
