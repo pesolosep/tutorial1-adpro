@@ -72,5 +72,40 @@ public class PaymentServiceImplTest {
         assertNull(paymentService.addPayment(payment.getOrder(), payment.getMethod(), payment.getPaymentData()));
         verify(paymentRepository, times(0)).save(payment);
     }
+    @Test
+    void testSetValid() {
+        Payment payment = payments.get(1);
+        Payment result = paymentService.setStatus(payment, "SUCCESS");
+        assertEquals(OrderStatus.SUCCESS.getValue(), result.getOrder().getStatus());
+    }
 
+    @Test
+    void testSetInvalidStatus() {
+        Payment payment = payments.get(1);
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment result = paymentService.setStatus(payment, "ABC");
+        });
+    }
+
+    @Test
+    void testGetPaymentIfFound(){
+        Payment payment = payments.get(1);
+        doReturn(payment).when(paymentRepository).findById(payment.getId());
+        Payment result = paymentService.getPayment(payment.getId());
+        verify(paymentRepository, times(1)).findById(payment.getId());
+        assertEquals(payment.getId(), result.getId());
+
+    }
+    @Test
+    void testGetPaymentIfNotFound(){
+        Payment result = paymentService.getPayment( "ABC");
+        assertNull(result);
+    }
+
+    @Test
+    void testGetAllPayments(){
+        doReturn(payments).when(paymentRepository.getAllPayment());
+        List<Payment> results = paymentService.getAllPayments();
+        assertEquals(payments, results);
+    }
 }
